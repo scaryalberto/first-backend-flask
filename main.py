@@ -1,10 +1,12 @@
-from flask import Flask, jsonify
+import os
+from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/api/hello', methods=['GET'])
-def hello():
-    return jsonify({"message": "Ciao dal tuo endpoint Flask!"})
+@app.route('/')
+def home():
+    return "Ciao, il mio servizio Flask è su Railway!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Usa la porta fornita da Railway
+    app.run(host='0.0.0.0', port=port)
